@@ -1,0 +1,18 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Radio+Canada:ital,wght@0,300..700;1,300..700&display=swap');
+
+:root {
+    --bg-color: #14213d;
+    --color-black: #000000;
+    --color-gold: #fca311;
+    --color-grey: #e5e5e5;
+    --color-white: #ffffff;
+
+    --font-canada: 'Radio Canada', sans-serif;
+
+}
+
+body {
+    font-family: var(--font-canada);
+    background-color: var(--color-grey);
+}
