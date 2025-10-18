@@ -60,7 +60,7 @@ async function seed() {
         volume: 500,
         manufacturer: m['Pivovara Brlog'],
         description: 'Aromatičan IPA s izraženim tropskim hmeljem i ugodnom gorčinom.',
-        imageUrl: '/images/beers/zlatni-ipa.png',
+        imageUrl: '../static/images/beers/1.png',
       },
       {
         name: 'Tamni Brlog Stout',
@@ -71,7 +71,7 @@ async function seed() {
         volume: 500,
         manufacturer: m['Pivovara Brlog'],
         description: 'Bogati stout s notama kave i tamne čokolade.',
-        imageUrl: '/images/beers/tamni-brlog-stout.png',
+        imageUrl: '../static/images/beers/5.png',
       },
       {
         name: 'Medved Sveži Pils',
@@ -82,7 +82,7 @@ async function seed() {
         volume: 500,
         manufacturer: m['Pivovara Medvedgrad'],
         description: 'Klasični pilsner s čistim i svježim završetkom.',
-        imageUrl: '/images/beers/medved-pils.png',
+        imageUrl: '../static/images/beers/9.png',
       },
       {
         name: 'Medved Amber Ale',
@@ -93,7 +93,7 @@ async function seed() {
         volume: 500,
         manufacturer: m['Pivovara Medvedgrad'],
         description: 'Komentar karameliziranih slada i blage citrusne note.',
-        imageUrl: '/images/beers/medved-amber.png',
+        imageUrl: '../static/images/beers/13.png',
       },
       {
         name: 'Zadruga Voćni Sour',
@@ -104,7 +104,7 @@ async function seed() {
         volume: 375,
         manufacturer: m['Pivovara Zadruga'],
         description: 'Kiselkasto-voćni sour s prirodnim okusom maline.',
-        imageUrl: '/images/beers/zadruga-sour.png',
+        imageUrl: '../static/images/beers/17.png',
       },
       {
         name: 'Zadruga Svetlo Pšenično',
@@ -115,7 +115,7 @@ async function seed() {
         volume: 500,
         manufacturer: m['Pivovara Zadruga'],
         description: 'Lagano pšenično pivo, osvježavajuće s notama banane i klinčića.',
-        imageUrl: '/images/beers/zadruga-wheat.png',
+        imageUrl: '../static/images/beers/2.png'
       },
       {
         name: 'Nova Runda Session IPA',
@@ -126,7 +126,7 @@ async function seed() {
         volume: 440,
         manufacturer: m['Pivovara Nova Runda'],
         description: 'Lagana, ali aromatična IPA za cijeli večernji pivski užitak.',
-        imageUrl: '/images/beers/nova-session-ipa.png',
+        imageUrl: '../static/images/beers/6.png',
       },
       {
         name: 'Nova Runda Doppelbock',
@@ -137,7 +137,7 @@ async function seed() {
         volume: 500,
         manufacturer: m['Pivovara Nova Runda'],
         description: 'Punog tijela, slatkast s notama sušenog voća.',
-        imageUrl: '/images/beers/nova-doppelbock.png',
+        imageUrl: '../static/images/beers/10.png',
       },
       {
         name: 'Brlog Hoppy Pale Ale',
@@ -148,7 +148,7 @@ async function seed() {
         volume: 500,
         manufacturer: m['Pivovara Brlog'],
         description: 'Biljne i citrusne note hmelja, uravnotežena gorčina.',
-        imageUrl: '/images/beers/brlog-pale.png',
+        imageUrl: '../static/images/beers/14.png',
       },
       {
         name: 'Medved Tamni Porter',
@@ -159,7 +159,7 @@ async function seed() {
         volume: 500,
         manufacturer: m['Pivovara Medvedgrad'],
         description: 'Gusta tekstura s notama karamele i pržene kave.',
-        imageUrl: '/images/beers/medved-porter.png',
+        imageUrl: '../static/images/beers/18.png',
       },
       {
         name: 'Zadruga Citrus IPA',
@@ -170,7 +170,7 @@ async function seed() {
         volume: 500,
         manufacturer: m['Pivovara Zadruga'],
         description: 'Izrazito citrusan profil, idealan uz ljetne obroke.',
-        imageUrl: '/images/beers/zadruga-citrus-ipa.png',
+        imageUrl: '../static/images/beers/3.png',
       },
       {
         name: 'Brlog Black Velvet Stout',
@@ -181,7 +181,7 @@ async function seed() {
         volume: 330,
         manufacturer: m['Pivovara Brlog'],
         description: 'Imperial stout s kompleksnim aromama čokolade i tamnog voća.',
-        imageUrl: '/images/beers/brlog-black-velvet.png',
+        imageUrl: '../static/images/beers/7.png',
       },
       {
         name: 'Nova Runda Saison',
@@ -192,7 +192,7 @@ async function seed() {
         volume: 500,
         manufacturer: m['Pivovara Nova Runda'],
         description: 'Suho i začinjeno, odličan uz sireve i uz roštilj.',
-        imageUrl: '/images/beers/nova-saison.png',
+        imageUrl: '../static/images/beers/11.png',
       },
       {
         name: 'Medved Klasik Lager',
@@ -203,7 +203,7 @@ async function seed() {
         volume: 500,
         manufacturer: m['Pivovara Medvedgrad'],
         description: 'Tradicionalni lager, lagan i osvježavajuć.',
-        imageUrl: '/images/beers/medved-lager.png',
+        imageUrl: '../static/images/beers/15.png',
       },
       {
         name: 'Zadruga Čoko Milk Stout',
@@ -214,7 +214,7 @@ async function seed() {
         volume: 500,
         manufacturer: m['Pivovara Zadruga'],
         description: 'Slatkast stout s dodatkom mliječnog šećera i podtonom čokolade.',
-        imageUrl: '/images/beers/zadruga-milk-stout.png',
+        imageUrl: '../static/images/beers/19.png',
       },
       {
         name: 'Brlog Red Ale',
@@ -225,7 +225,7 @@ async function seed() {
         volume: 500,
         manufacturer: m['Pivovara Brlog'],
         description: 'Kombinacija karamele i lagane citrusne gorčine.',
-        imageUrl: '/images/beers/brlog-red-ale.png',
+        imageUrl: '../static/images/beers/4.png',
       },
       {
         name: 'Nova Runda Berry Sour',
@@ -236,7 +236,7 @@ async function seed() {
         volume: 375,
         manufacturer: m['Pivovara Nova Runda'],
         description: 'Kiselo-voćni napitak s intenzivnim notama bobičastog voća.',
-        imageUrl: '/images/beers/nova-berry-sour.png',
+        imageUrl: '../static/images/beers/8.png',
       },
       {
         name: 'Medved Hazy IPA',
@@ -247,7 +247,7 @@ async function seed() {
         volume: 440,
         manufacturer: m['Pivovara Medvedgrad'],
         description: 'Neprozoran, tropski aromatičan i vrlo pitak.',
-        imageUrl: '/images/beers/medved-hazy.png',
+        imageUrl: '../static/images/beers/12.png',
       },
       {
         name: 'Zadruga Session Lager',
@@ -258,7 +258,7 @@ async function seed() {
         volume: 500,
         manufacturer: m['Pivovara Zadruga'],
         description: 'Lagan lager s naglaskom na osvježavajuću pitičnost.',
-        imageUrl: '/images/beers/zadruga-session-lager.png',
+        imageUrl: '../static/images/beers/16.png',
       },
       {
         name: 'Brlog Barrel Aged Ale',
@@ -269,7 +269,7 @@ async function seed() {
         volume: 330,
         manufacturer: m['Pivovara Brlog'],
         description: 'Složeno pivo odležano u bačvama s izraženim drvenim notama.',
-        imageUrl: '/images/beers/brlog-barrel.png',
+        imageUrl: '../static/images/beers/20.png',
       },
     ];
 
