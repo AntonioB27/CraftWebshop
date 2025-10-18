@@ -1,0 +1,41 @@
+import React, { useEffect, useState } from 'react';
+
+function Profile({ user }) {
+  const [profile, setProfile] = useState(user || null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    async function loadProfile() {
+      if (!user || !user._id) return;
+      setLoading(true);
+      try {
+        const res = await fetch(`/api/users/${user._id}`);
+        if (!res.ok) throw new Error('Failed to load profile');
+        const data = await res.json();
+        // controller returns { user: userObj }
+        setProfile(data.user || data);
+      } catch (err) {
+        setError(err.message || 'Error loading profile');
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadProfile();
+  }, [user]);
+
+  if (!user) return <div>Molimo prijavite se da vidite profil.</div>;
+  if (loading) return <div>Učitavanje...</div>;
+  if (error) return <div>Greška: {error}</div>;
+
+  return (
+    <div className="p-4">
+      <h2 className="text-2xl font-bold mb-4">Profil</h2>
+      <p><strong>Ime:</strong> {profile?.name}</p>
+      <p><strong>Email:</strong> {profile?.email}</p>
+      <p><strong>Admin:</strong> {profile?.isAdmin ? 'Da' : 'Ne'}</p>
+    </div>
+  );
+}
+
+export default Profile;

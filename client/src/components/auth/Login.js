@@ -1,19 +1,33 @@
 import React, { useState } from 'react';
+import { data, useNavigate } from 'react-router-dom';
 
-function Login() {
+function Login({ setUser }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
     const res = await fetch('/api/users/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password }),
     });
     const data = await res.json();
-    setMessage(data.message || 'Login failed');
+    if (!res.ok) {
+      setMessage(data.message || 'Login failed');
+      return;
+    }
+   localStorage.setItem('user', JSON.stringify(data));
+   if(setUser) {
+    setUser(data);
+   }
+   navigate('/');
+   } catch (error) {
+    setMessage('An error occurred. Please try again.');
+   }
   };
 
   return (
