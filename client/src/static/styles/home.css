@@ -1,0 +1,194 @@
+/* General container */
+.home-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 32px;
+  min-height: 100vh;
+  font-family: "Inter", Arial, sans-serif;
+}
+
+/* Individual beer card */
+.beer-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  padding: 16px;
+  width: 240px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+}
+
+.beer-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+/* Beer image */
+.beer-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  transition: transform 0.3s ease;
+}
+
+.beer-card:hover img {
+  transform: scale(1.05);
+}
+
+/* Beer name */
+.beer-card h2 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #222;
+  text-align: center;
+}
+
+/* Beer info text */
+.beer-card p {
+  margin-bottom: 4px;
+  color: #555;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+/* Price highlight */
+.beer-card .price {
+  color: #c0392b;
+  font-weight: 600;
+}
+
+/* Loading and error states */
+.loading, .error {
+  padding: 24px;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.error {
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+.beer-image-container {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Beer image */
+.beer-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.beer-card:hover .beer-image-container img {
+  transform: scale(1.05);
+}
+
+/* Hidden overlay description */
+.beer-description {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.863);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  padding: 10px;
+  text-align: center;
+  font-size: 0.9rem;
+  transition: opacity 0.7s ease;
+  border-radius: 12px;
+}
+
+.beer-card:hover .beer-description {
+  opacity: 1;
+}
+
+.currency-button {
+  position: fixed;
+  bottom: 20px; /* distance from bottom */
+  left: 20px;   /* distance from left */
+  padding: 12px 22px;
+  border: none;
+  border-radius: 12px;
+  background-color: #f39c12; /* golden beer color */
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 0 10px #f39c12, 0 0 20px #f39c12, 0 0 30px #f39c12;
+  animation: jumpGlow 1.5s infinite;
+  z-index: 1000; /* make sure it stays on top */
+  transition: all 0.3s ease;
+}
+
+.currency-button:hover {
+  background-color: #e67e22;
+}
+
+.currency-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(243, 156, 18, 0.5);
+}
+
+/* Keyframes for jumping and glowing */
+@keyframes jumpGlow {
+  0%, 100% {
+    transform: translateY(0);
+    box-shadow: 0 0 10px #f39c12, 0 0 20px #f39c12, 0 0 30px #f39c12;
+  }
+  25% {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px #f39c12, 0 0 25px #f39c12, 0 0 35px #f39c12;
+  }
+  50% {
+    transform: translateY(-10px);
+    box-shadow: 0 0 20px #f39c12, 0 0 30px #f39c12, 0 0 40px #f39c12;
+  }
+  75% {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px #f39c12, 0 0 25px #f39c12, 0 0 35px #f39c12;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.beer-card {
+  animation: fadeInUp 0.6s ease forwards;
+  opacity: 0;
+}
+
+.beer-card:nth-child(1) { animation-delay: 0.1s; }
+.beer-card:nth-child(2) { animation-delay: 0.2s; }
+.beer-card:nth-child(3) { animation-delay: 0.3s; }
+.beer-card:nth-child(4) { animation-delay: 0.4s; }
+.beer-card:nth-child(5) { animation-delay: 0.5s; }
+.beer-card:nth-child(6) { animation-delay: 0.6s; }
+.beer-card:nth-child(7) { animation-delay: 0.7s; }
+.beer-card:nth-child(8) { animation-delay: 0.8s; }
+.beer-card:nth-child(9) { animation-delay: 0.9s; }
+.beer-card:nth-child(10) { animation-delay: 1s; }
+.beer-card:nth-child(11) { animation-delay: 1.1s; }
+.beer-card:nth-child(12) { animation-delay: 1.2s; }

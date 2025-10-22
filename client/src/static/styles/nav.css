@@ -1,0 +1,130 @@
+:root{
+  --bg-start: #1f1a1a;
+  --bg-end: #1f1a1a;
+  --accent: #ffb300; /* warm yellow accent */
+  --muted: rgba(255,255,255,0.08);
+  --text: #ffffff;
+  --glass: rgba(255,255,255,0.04);
+}
+
+body {
+  background: linear-gradient(135deg, #fff7e6, #ffe9b5, #806a36);
+  background-attachment: fixed;
+}
+
+.navbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  padding:12px 18px;
+  background: linear-gradient(90deg, var(--bg-start) 0%, var(--bg-end) 100%);
+  color:var(--text);
+  border-radius:10px;
+  box-shadow: 0 8px 30px rgba(2,6,23,0.6);
+  backdrop-filter: blur(6px);
+  margin:8px;
+}
+
+/* Left: logo + brand */
+.navbar-left{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.logo img{
+  width:44px;
+  height:44px;
+  object-fit:contain;
+  border-radius:8px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.06));
+  padding:6px;
+  box-shadow: 0 4px 14px rgba(2,6,23,0.5), inset 0 -2px 6px rgba(255,255,255,0.02);
+}
+.brand{
+  font-weight:700;
+  font-size:1.1rem;
+  letter-spacing:0.6px;
+}
+
+/* Center: main links */
+.navbar-center{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+/* Right: user controls */
+.navbar-right{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+/* Buttons / links */
+.nav-link{
+  text-decoration:none;
+}
+
+.nav-button{
+  appearance:none;
+  border: none;
+  background: transparent;
+  color:var(--text);
+  padding:8px 12px;
+  border-radius:10px;
+  font-weight:600;
+  cursor:pointer;
+  transition: transform .12s ease, background .12s ease, box-shadow .12s ease;
+  box-shadow: none;
+  font-size:0.98rem;
+}
+
+.nav-button:hover{
+  background: var(--accent);
+  transform: translateY(-3px);
+  padding: 16px 20px;
+  box-shadow: 0 6px 18px rgba(255, 255, 255, 0.45);
+  transition: background 0.5s, padding 1s, box-shadow 1.5s;
+}
+
+.nav-button:active{
+  transform: translateY(-1px);
+}
+
+/* Primary (accent) button */
+.primary{
+  background: linear-gradient(90deg, rgba(255,179,0,0.95), rgba(255,150,0,0.95));
+  color:#0b0b0b;
+  box-shadow: 0 8px 20px rgba(255,179,0,0.14);
+}
+.primary:hover{
+  filter:brightness(1.02);
+}
+
+/* Admin badge */
+.admin-badge{
+  margin-left:8px;
+  background: #ffcf5c;
+  color:#111;
+  padding:6px 10px;
+  border-radius:8px;
+  font-weight:800;
+  font-size:0.9rem;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+}
+
+/* Responsive tweaks */
+@media (max-width:700px){
+  .navbar{
+    padding:10px 12px;
+    gap:8px;
+  }
+  .brand{
+    font-size:1rem;
+  }
+  .nav-button{
+    padding:7px 10px;
+    font-size:0.92rem;
+  }
+}

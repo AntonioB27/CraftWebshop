@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Incident report</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css" integrity="sha384-SI27wrMjH3ZZ89r4o+fGIJtnzkAnFs3E4qz9DIYioCQ5l9Rd/7UAa8DHcaL8jkWt" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/js/bootstrap.min.js" integrity="sha384-3qaqj0lc6sV/qpzrc1N5DC6i1VRn/HyX4qdPaiEFbn54VjQBEU341pvjz7Dv3n6P" crossorigin="anonymous"></script>
+<style>
+div {
+	padding-top: 10px;
+}
+input[type=file] {
+	padding-left: 0px !important;
+}
+</style>
+</head>
+<script>
+
+function wrap(error) {
+  return JSON.stringify({ error: error });
+}
+function handleRequest(data) {
+  let json = JSON.parse(data);
+  
+  if(typeof(json.id) !== 'number' || isNaN(json.id)) {
+    return wrap("Field id should be a required number.");
+  }
+  if((json.id) < 0) {
+    return wrap("Field id should be equal to or larger than 0.");
+  }
+  if(!json.incidentCode || typeof json.incidentCode !== 'string') {
+    return wrap("Field incidentCode should be a required string.");
+  }
+  
+  if(!json.description || (json.descriptoin && typeof json.description !== 'string')) {
+    return wrap("Field description should be a required string.");
+  }
+  if(json.activationCode && typeof json.activationCode !== 'string') {
+    return wrap("Field activationCode should be an optional string.");
+  }
+
+  if(json.incidentCode.trim().length >= 10 || json.incidentCode.trim().length <= 3) {
+    return wrap("Field incidentCode should have between 3 and 10 characters, inclusive.");
+  }
+  if(json.activationCode && (!json.activationCode.length || json.activationCode.length >= 5)) {
+    return wrap("Field activationCode can have at most 5 characters.");
+  }
+  if(json.descriptoin && !json.activationCode) {
+    return wrap("If a field description is present, activationCode is required.");
+  }
+  
+  return JSON.stringify( { status: "Succesfully entered" });
+}
+function sendRequest() {
+  let payload = document.getElementById("payload");
+  let resultElement = document.getElementById("result");
+  try {
+    let result = handleRequest(payload.value);
+    resultElement.innerText = result;
+  } catch(e) {
+    resultElement.innerText = e.message || e;
+  }
+}
+function autoHeight(element) {
+  element.style.height = "auto";
+  element.style.height = element.scrollHeight + "px";
+}
+function resetForm() {
+  let form = document.getElementById("payload");
+  
+  form.value = `{
+  "id": 1,
+  "incidentCode": "12345",
+  "description": "description",
+  "activationCode": "12"
+}`;
+  autoHeight(form);
+}
+if(window.onload) {
+  let tmp = window.onload;
+  window.onload = (event) => { 
+    tmp(event);
+	setTimeout(() => resetForm());
+  };
+} else {
+  window.onload = setTimeout(() => resetForm());
+}
+
+</script>
+<body>
+<div class="container">
+  <div class="row justify-content-center">
+    <h3>Send request</h3>
+  </div>
+  <div class="row justify-content-center">
+	<label for="payload" class="col-2">JSON payload:</label>
+    <textarea type="text" oninput="autoHeight(document.getElementById('payload'))" class="col-8" id="payload" name="payload"></textarea>
+  </div>
+  <div class="row">
+    <button class="col-2 offset-7" onclick="resetForm()">Reset form</button>
+    <button class="col-2" onclick="sendRequest()">Send request</button>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <h3>Result</h3>
+  </div>
+  <div class="row justify-content-center">
+    <div id="result" class="col-8 offset-2"></div>
+  </div>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,98 @@
+/* General body styling */
+.container {
+  font-family: 'Inter', Arial, sans-serif;
+  height: 30%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: streth-start;
+  margin: 0;
+  gap: 100px;
+  padding: 40px 40px;
+}
+
+.text-container { 
+  background-color: #ffffffcc; /* poluprozirna bijela */
+  backdrop-filter: blur(10px);
+  padding: 40px 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  width: 320px;
+  text-align: center;
+  flex-grow: 2;
+  display: flex;
+  align-items: center;
+}
+
+/* Container for forms */
+.auth-container {
+  background-color: #ffffffcc; /* poluprozirna bijela */
+  backdrop-filter: blur(10px);
+  padding: 40px 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  width: 320px;
+  text-align: center;
+  flex-grow: 1;
+}
+
+/* Headings */
+.auth-container h2 {
+  font-size: 1.8rem;
+  margin-bottom: 24px;
+  color: #333;
+}
+
+/* Form styling */
+.auth-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Input fields */
+.auth-container input {
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.auth-container input:focus {
+  outline: none;
+  border-color: #f39c12;
+  box-shadow: 0 0 8px rgba(243, 156, 18, 0.4);
+}
+
+/* Buttons */
+.auth-container button {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: #f39c12;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.auth-container button:hover {
+  background-color: #e67e22;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* Message paragraph */
+.auth-container p {
+  margin-top: 12px;
+  font-size: 0.95rem;
+  color: #e74c3c;
+}
+
+/* Responsive for mobile */
+@media (max-width: 400px) {
+  .auth-container {
+    width: 90%;
+    padding: 32px 20px;
+  }
+}

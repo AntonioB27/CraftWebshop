@@ -2,6 +2,8 @@ const express = require("express");
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const userRoute = require('./routes/userRoute');
+const beerRoute = require('./routes/beerRoute');
+const path = require('path');
 
 dotenv.config();
 
@@ -12,6 +14,8 @@ const app = express();
 
 app.use(express.json());
 
+app.use('/static', express.static(path.join(__dirname, 'static')));
+
 mongoose.connect(MONGO_URL, {}).then(() => {
     console.log("Connected to MongoDB");
 }).catch((err) => {
@@ -19,9 +23,10 @@ mongoose.connect(MONGO_URL, {}).then(() => {
 });
 
 const apiRouter = express.Router();
-apiRouter.use('/users', userRoute);
-
 app.use('/api', apiRouter);
+
+apiRouter.use('/users', userRoute);
+apiRouter.use('/beers', beerRoute);
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
