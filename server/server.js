@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const userRoute = require('./routes/userRoute');
 const beerRoute = require('./routes/beerRoute');
+const manufacturerRoute = require('./routes/manufacturerRoute')
 const path = require('path');
 
 dotenv.config();
@@ -27,6 +28,7 @@ app.use('/api', apiRouter);
 
 apiRouter.use('/users', userRoute);
 apiRouter.use('/beers', beerRoute);
+apiRouter.use('/manufacturers', manufacturerRoute)
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);

@@ -31,6 +31,11 @@ export default function NavBar({ user, setUser }) {
             Proizvodi
           </button>
         </Link>
+        <Link to="/proizvodaci" className="nav-link">
+          <button type="button" className="nav-button primary">
+            Proizvodaci
+          </button>
+        </Link>
       </div>
 
       <div className="navbar-right">

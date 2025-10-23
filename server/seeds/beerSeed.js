@@ -20,7 +20,7 @@ async function seed() {
         founded: 1994,
         country: 'Hrvatska',
         description: 'Poznata hrvatska craft pivovara s naglaskom na tradicionalne i eksperimentalne stilove.',
-        logoUrl: 'http://localhost:5000/static/images/medvedgrad.png',
+        logoUrl: 'http://localhost:5000/static/images/medvedgrad.jpg',
       },
       {
         name: 'Pivovara Zadruga',
@@ -34,7 +34,7 @@ async function seed() {
         founded: 2016,
         country: 'Hrvatska',
         description: 'Eksperimentalna pivovara fokusirana na IPA i tamne stilove.',
-        logoUrl: 'http://localhost:5000/static/images/brlog.png',
+        logoUrl: 'http://localhost:5000/static/images/brlog.jpg',
       },
       {
         name: 'Pivovara Nova Runda',
