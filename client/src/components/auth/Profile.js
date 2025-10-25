@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
+import "../../static/styles/profile.css"
 
 function Profile({ user }) {
   const [profile, setProfile] = useState(user || null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   useEffect(() => {
     async function loadProfile() {
@@ -11,12 +12,12 @@ function Profile({ user }) {
       setLoading(true);
       try {
         const res = await fetch(`/api/users/${user._id}`);
-        if (!res.ok) throw new Error('Failed to load profile');
+        if (!res.ok) throw new Error("Failed to load profile");
         const data = await res.json();
         // controller returns { user: userObj }
         setProfile(data.user || data);
       } catch (err) {
-        setError(err.message || 'Error loading profile');
+        setError(err.message || "Error loading profile");
       } finally {
         setLoading(false);
       }
@@ -29,11 +30,19 @@ function Profile({ user }) {
   if (error) return <div>Greška: {error}</div>;
 
   return (
-    <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">Profil</h2>
-      <p><strong>Ime:</strong> {profile?.name}</p>
-      <p><strong>Email:</strong> {profile?.email}</p>
-      <p><strong>Admin:</strong> {profile?.isAdmin ? 'Da' : 'Ne'}</p>
+    <div className="profile-container">
+      <div className="profile-card">
+        <h2>Profil</h2>
+        <p>
+          <strong>Ime:</strong> {profile?.name}
+        </p>
+        <p>
+          <strong>Email:</strong> {profile?.email}
+        </p>
+        <p>
+          <strong>Admin:</strong> {profile?.isAdmin ? "Da" : "Ne"}
+        </p>
+      </div>
     </div>
   );
 }

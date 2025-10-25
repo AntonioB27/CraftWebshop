@@ -65,7 +65,11 @@ export default function NavBar({ user, setUser }) {
           </>
         )}
 
-        {isUserAdmin && <div className="admin-badge">Admin</div>}
+        {isUserAdmin && <Link to="/admin" className="nav-link">
+              <button type="button" className="nav-button">
+                Admin
+              </button>
+            </Link>}
       </div>
     </nav>
   );

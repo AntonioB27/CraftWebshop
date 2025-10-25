@@ -7,6 +7,7 @@ import NavBar from "./components/NavBar";
 import Home from "./components/home/Home";
 import Footer from "./components/elements/Footer";
 import Manufacturers from "./components/home/Manufacturers";
+import Admin from "./components/admin/Admin";
 
 function App() {
   const [user, setUser] = useState(() => {
@@ -28,6 +29,7 @@ function App() {
         <Route path="/register" element={<Register setUser={setUser} />} />
         <Route path="/profile" element={<Profile user={user?.user} />} />
         <Route path="/proizvodaci" element={<Manufacturers />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     <Footer></Footer>
     </Router>
