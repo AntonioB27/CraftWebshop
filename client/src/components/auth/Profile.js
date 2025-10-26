@@ -14,7 +14,6 @@ function Profile({ user }) {
         const res = await fetch(`/api/users/${user._id}`);
         if (!res.ok) throw new Error("Failed to load profile");
         const data = await res.json();
-        // controller returns { user: userObj }
         setProfile(data.user || data);
       } catch (err) {
         setError(err.message || "Error loading profile");

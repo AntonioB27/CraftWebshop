@@ -14,7 +14,7 @@ export default function NavBar({ user, setUser }) {
     navigate("/");
   };
 
-  const isUserAdmin = !!(user && user.user && user.user.isAdmin);
+  const isUserAdmin = !!(user && user && user.isAdmin);
 
   return (
     <nav className="navbar">
@@ -65,11 +65,13 @@ export default function NavBar({ user, setUser }) {
           </>
         )}
 
-        {isUserAdmin && <Link to="/admin" className="nav-link">
-              <button type="button" className="nav-button">
-                Admin
-              </button>
-            </Link>}
+        {isUserAdmin && (
+          <Link to="/admin" className="nav-link">
+            <button type="button" className="nav-button">
+              Admin
+            </button>
+          </Link>
+        )}
       </div>
     </nav>
   );

@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-import { data, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../../static/styles/auth.css";
 
-function Login({ setUser }) {
+export default function Login({ setUser }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
     try {
       const res = await fetch("/api/users/login", {
@@ -17,19 +16,18 @@ function Login({ setUser }) {
         body: JSON.stringify({ email, password }),
       });
       const data = await res.json();
-      if (!res.ok) {
-        setMessage(data.message || "Login failed");
-        return;
-      }
-      localStorage.setItem("user", JSON.stringify(data));
-      if (setUser) {
-        setUser(data);
-      }
+      if (!res.ok) throw new Error(data.message || "Login failed");
+
+      // store token and user
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+      setUser(data.user);
       navigate("/");
-    } catch (error) {
-      setMessage("An error occurred. Please try again.");
+    } catch (err) {
+      console.error(err);
+      alert(err.message || "Login error");
     }
-  };
+  }
 
   return (
     <div className="container">
@@ -55,10 +53,7 @@ function Login({ setUser }) {
           />
           <button type="submit">Login</button>
         </form>
-        <p>{message}</p>
       </div>
     </div>
   );
 }
-
-export default Login;

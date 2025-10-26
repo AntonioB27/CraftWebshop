@@ -2,31 +2,33 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../static/styles/auth.css";
 
-function Register() {
-  const [name, setName] = useState("");
+export default function Register({ setUser }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
+  const [name, setName] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
     try {
       const res = await fetch("/api/users/create", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password }),
+        body: JSON.stringify({ email, password, name }),
       });
       const data = await res.json();
-      if (!res.ok) {
-        setMessage(data.message || "Registration failed");
-        return;
-      }
-      navigate("/login");
-    } catch (error) {
-      setMessage("An error occurred. Please try again.");
+      if (!res.ok) throw new Error(data.message || "Registration failed");
+
+      // store token and user
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+      setUser(data.user);
+      navigate("/");
+    } catch (err) {
+      console.error(err);
+      alert(err.message || "Registration error");
     }
-  };
+  }
 
   return (
     <div className="container">
@@ -59,10 +61,7 @@ function Register() {
           />
           <button type="submit">Register</button>
         </form>
-        <p>{message}</p>
       </div>
     </div>
   );
 }
-
-export default Register;

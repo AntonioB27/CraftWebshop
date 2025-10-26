@@ -1,0 +1,41 @@
+.admin-action-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background: linear-gradient(90deg, rgba(243,156,18,0.95), rgba(255,185,70,0.95));
+  color: #071222;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(243,156,18,0.12);
+  transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+  text-decoration: none;
+  line-height: 1;
+}
+
+.admin-action-button:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.03);
+  box-shadow: 0 14px 36px rgba(2,6,23,0.35);
+}
+
+.admin-action-icon {
+  width: 20px;
+  height: 20px;
+  display: block;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 6px rgba(2,6,23,0.2));
+}
+
+.admin-action-label {
+  font-size: 0.95rem;
+  letter-spacing: 0.3px;
+}
+
+/* compact variant for small screens */
+@media (max-width: 520px) {
+  .admin-action-button { padding: 7px 10px; gap: 8px; border-radius: 8px; }
+  .admin-action-label { display: none; } /* show only icon on very small screens */
+}
