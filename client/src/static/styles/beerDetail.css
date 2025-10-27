@@ -1,0 +1,131 @@
+/* Main container */
+.beer-detail-container {
+  min-height: 100vh;
+  padding: 40px 80px;
+  font-family: "Inter", Arial, sans-serif;
+  color: #333;
+}
+
+/* Back link */
+.back-link {
+  display: inline-block;
+  margin-bottom: 24px;
+  color: #ffb300;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.back-link:hover {
+  color: #af7b00;
+  text-decoration: underline;
+}
+
+/* Detail card */
+.beer-detail-card {
+  display: flex;
+  gap: 40px;
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 32px;
+  align-items: flex-start;
+  max-width: 1000px;
+  margin: 0 auto;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+/* Beer image */
+.beer-detail-image img {
+  width: 340px;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.beer-detail-image img:hover {
+  transform: scale(1.05);
+}
+
+/* Info section */
+.beer-detail-info {
+  flex: 1;
+}
+
+.beer-detail-info h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 12px;
+}
+
+.beer-detail-info p {
+  font-size: 1rem;
+  margin-bottom: 8px;
+  color: #555;
+}
+
+/* Price highlight */
+.beer-detail-info .price {
+  color: #c0392b;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+}
+
+/* Description box */
+.beer-full-description {
+  margin-top: 20px;
+  background-color: #f8fafc;
+  border-left: 4px solid #ffb300;
+  padding: 16px 20px;
+  border-radius: 8px;
+}
+
+.beer-full-description h3 {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  color: #222;
+}
+
+.beer-full-description p {
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Subtle fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive layout */
+@media (max-width: 900px) {
+  .beer-detail-card {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .beer-detail-image img {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .beer-detail-info {
+    text-align: center;
+  }
+
+  .beer-full-description {
+    text-align: left;
+  }
+}

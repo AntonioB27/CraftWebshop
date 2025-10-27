@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import NavBar from "./components/NavBar";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Profile from "./components/auth/Profile";
-import NavBar from "./components/NavBar";
 import Home from "./components/home/Home";
 import Footer from "./components/elements/Footer";
 import Manufacturers from "./components/home/Manufacturers";
 import Admin from "./components/admin/Admin";
 import AdminUsers from "./components/admin/AdminUsers";
+import BeerDetail from "./components/home/BeerDetail"; // added import
 
 function App() {
   const [user, setUser] = useState(() => {
@@ -57,8 +58,8 @@ function App() {
         <Route path="/proizvodaci" element={<Manufacturers />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/admin/korisnici" element={<AdminUsers user={user} />} />
+        <Route path="/proizvodi/:id" element={<BeerDetail />} />
       </Routes>
-    <Footer></Footer>
     </Router>
   );
 }

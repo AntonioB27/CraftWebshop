@@ -15,6 +15,9 @@ export default function Home() {
         const res = await fetch("/api/beers");
         if (!res.ok) throw new Error("Ne mogu dohvatiti piva");
         const data = await res.json();
+        data.sort((a, b) => {
+          return a.manufacturer.name.localeCompare(b.manufacturer.name);
+        });
         setBeers(data);
       } catch (err) {
         setError(err.message || "Greška pri dohvaćanju");
@@ -49,9 +52,12 @@ export default function Home() {
               Cijena: {currency === "eur" ? beer.priceEur : beer.priceHrk}{" "}
               {currency === "eur" ? "EUR" : "HRK"}
             </p>
-            <p>ABV: {beer.abv}%</p>
-            <p>Tip: {beer.type}</p>
-            <p>Volumen: {beer.volume} ml</p>
+            <p>Proizvođač: {beer.manufacturer.name}</p>
+            <div className="beer-card-actions">
+              <a href={`/proizvodi/${beer._id}`} className="details-button">
+                Detalji
+              </a>
+            </div>
           </div>
         ))}
       </div>
