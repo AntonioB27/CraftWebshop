@@ -35,6 +35,38 @@ export default function BeerDetail() {
     return `${API_BASE}/static/images/beers/${filename}`;
   };
 
+  const isUserAdmin = () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    return user && user.isAdmin;
+  }
+
+  async function handleDelete() {
+    if (isUserAdmin() === false) {
+      alert("Nemate ovlasti za brisanje piva.");
+      setError("Nemate ovlasti za brisanje piva.");
+      return;
+    }
+    const confirm = window.confirm("Jeste li sigurni da želite izbrisati ovo pivo?");
+    if (!confirm) return;
+
+    try {
+      setLoading(true);
+      const token = localStorage.getItem("token");
+      const res = await fetch(`/api/beers/${beer._id}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!res.ok) throw new Error("Brisanje nije uspjelo");
+      alert("Pivo je uspješno izbrisano.");
+      window.location.href = "/proizvodi";
+    } catch (err) {
+      alert(err.message || "Greška pri brisanju piva");
+      setError(err.message || "Greška pri brisanju piva");
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <div className="beer-detail-container">
       <Link to="/proizvodi" className="back-link">← Natrag na proizvode</Link>
@@ -58,6 +90,13 @@ export default function BeerDetail() {
             <p>{beer.description || "Nema dodatnog opisa."}</p>
           </div>
         </div>
+        {isUserAdmin() && (
+        <div className="admin-actions">
+          <button className="delete-beer-button" onClick={handleDelete}>
+            Izbriši Pivo
+          </button>
+        </div>
+      )}
       </div>
     </div>
   );

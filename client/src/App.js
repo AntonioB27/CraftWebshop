@@ -10,6 +10,7 @@ import Manufacturers from "./components/home/Manufacturers";
 import Admin from "./components/admin/Admin";
 import AdminUsers from "./components/admin/AdminUsers";
 import BeerDetail from "./components/home/BeerDetail"; // added import
+import AdminCreateBeer from "./components/admin/AdminCreateBeer";
 
 function App() {
   const [user, setUser] = useState(() => {
@@ -59,6 +60,7 @@ function App() {
         <Route path="/admin" element={<Admin />} />
         <Route path="/admin/korisnici" element={<AdminUsers user={user} />} />
         <Route path="/proizvodi/:id" element={<BeerDetail />} />
+        <Route path="/admin/kreiraj-pivo" element={<AdminCreateBeer user={user} />} />
       </Routes>
     </Router>
   );

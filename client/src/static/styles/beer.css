@@ -1,0 +1,141 @@
+/* Main container */
+.add-beer-container {
+    min-height: 100vh;
+    padding: 40px 80px;
+    font-family: "Inter", Arial, sans-serif;
+    color: #333;
+}
+
+/* Header section */
+.add-beer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    background: linear-gradient(90deg, rgba(255, 179, 0, 0.95), rgba(255, 150, 0, 0.95));
+    color: #0b0b0b;
+    padding: 5px 20px;
+    border-radius: 30px;
+}
+
+.add-beer-header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #222;
+}
+
+/* Form styling */
+.add-beer-form {
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 32px;
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    gap: 12px;
+    grid-template-columns: 1fr 1fr;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Labels and inputs */
+.add-beer-form label {
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+    color: #222;
+    font-size: 0.95rem;
+}
+
+.add-beer-form input,
+.add-beer-form select,
+.add-beer-form textarea {
+    margin-top: 6px;
+    padding: 10px 12px;
+    border: 1px solid #ccd6e0;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    color: #333;
+    background-color: #fdfdfd;
+    transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.add-beer-form input:focus,
+.add-beer-form select:focus,
+.add-beer-form textarea:focus {
+    outline: none;
+    border-color: #0077cc;
+    box-shadow: 0 0 0 3px rgba(0, 119, 204, 0.1);
+}
+
+/* Buttons */
+.form-button {
+    background-color: #0077cc;
+    color: white;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 18px;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.form-button:hover {
+    background-color: #005fa3;
+    transform: translateY(-1px);
+}
+
+.form-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Error message */
+.form-error {
+    background-color: #ffe6e6;
+    border: 1px solid #ffb3b3;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: 500;
+    color: crimson;
+    grid-column: 1 / -1;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .add-beer-container {
+        padding: 24px;
+    }
+
+    .add-beer-form {
+        grid-template-columns: 1fr;
+        padding: 20px;
+    }
+
+    .add-beer-header {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+    }
+
+    .form-button {
+        width: 100%;
+        text-align: center;
+    }
+}

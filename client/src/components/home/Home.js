@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import "../../static/styles/home.css";
+import "../../static/styles/home.css"
+import { Link } from "react-router-dom";
 
 export default function Home() {
   const [beers, setBeers] = useState([]);
@@ -8,6 +9,11 @@ export default function Home() {
   const [currency, setCurrency] = useState("eur");
 
   const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
+  const isUserAdmin = () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    return user && user.isAdmin;
+  }
 
   useEffect(() => {
     async function load() {
@@ -68,6 +74,13 @@ export default function Home() {
         >
           {currency === "eur" ? "HRK" : "EUR"}
         </button>
+        {isUserAdmin() && (
+          <Link to="/admin/kreiraj-pivo">
+            <button type="button" className="create-beer-button">
+              <span>Kreiraj Pivo</span>
+            </button>
+          </Link>
+        )}
       </div>
     </>
   );
