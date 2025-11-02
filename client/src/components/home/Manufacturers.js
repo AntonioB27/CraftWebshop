@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "../../static/styles/home.css";
 
-export default function Home() {
+export default function Manufacturers() {
   const [manufacturers, setManufacturers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const API_BASE = process.env.REACT_APP_API_URL;
+  const API_BASE = process.env.REACT_APP_API_URL || "";
 
   useEffect(() => {
     async function load() {
@@ -29,7 +30,7 @@ export default function Home() {
 
   const getImgSrc = (manufacturer) => {
     const filename = manufacturer?.logoUrl ? manufacturer.logoUrl.split("/").pop() : "1.jpg";
-    return `${API_BASE}/static/images/${filename}`;
+    return `${API_BASE}/static/images/${filename}`.replace("//static", "/static");
   };
 
   return (
@@ -40,12 +41,18 @@ export default function Home() {
             <div className="beer-image-container">
               <img src={getImgSrc(manufacturer)} alt={manufacturer.name} />
               <div className="beer-description">
-                <p>{manufacturer.description || "Nema opisa za ovo pivo."}</p>
+                <p>{manufacturer.description || "Nema opisa."}</p>
               </div>
             </div>
             <h1>{manufacturer.name}</h1>
-            <p>Otvoreno: {manufacturer.founded}</p>
-            <p>Zemlja: {manufacturer.country}</p>
+            {manufacturer.founded && <p>Osnovano: {manufacturer.founded}</p>}
+            {manufacturer.country && <p>Zemlja: {manufacturer.country}</p>}
+
+            <div style={{ marginTop: 10 }}>
+              <Link to={`/proizvodaci/${manufacturer._id}`} className="details-button">
+                Detalji
+              </Link>
+            </div>
           </div>
         ))}
       </div>

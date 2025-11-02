@@ -81,6 +81,13 @@ export default function Home() {
             </button>
           </Link>
         )}
+        {isUserAdmin() && (
+          <Link to="/admin/kreiraj-proizvodac">
+            <button type="button" className="create-manufacturer-button">
+              <span>Kreiraj Proizvođača</span>
+            </button>
+          </Link>
+        )}
       </div>
     </>
   );

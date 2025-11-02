@@ -1,4 +1,6 @@
 const Beer = require('../models/beerModel');
+const Manufacturer = require('../models/manufacturerModel');
+const mongoose = require('mongoose');
 
 exports.getAll = async (req, res) => {
     try {
@@ -26,9 +28,28 @@ exports.getById = async (req, res) => {
 
 exports.createBeer = async (req, res) => {
     try {
+        if (req.body.manufacturer) {
+            const mVal = req.body.manufacturer;
+            if (mongoose.Types.ObjectId.isValid(mVal)) {
+                const exists = await Manufacturer.findById(mVal);
+                if (!exists) return res.status(400).json({ message: 'Manufacturer not found' });
+                req.body.manufacturer = exists._id;
+            } else if (typeof mVal === 'string') {
+                let m = await Manufacturer.findOne({ name: { $regex: `^${mVal}$`, $options: 'i' } });
+                if (!m) {
+                    m = new Manufacturer({ name: mVal });
+                    await m.save();
+                }
+                req.body.manufacturer = m._id;
+            } else {
+                return res.status(400).json({ message: 'Invalid manufacturer value' });
+            }
+        }
+
         const newBeer = new Beer(req.body);
         const savedBeer = await newBeer.save();
-        res.status(201).json(savedBeer);
+        const populated = await Beer.findById(savedBeer._id).populate('manufacturer');
+        res.status(201).json(populated);
     } catch (error) {
         console.error('Error creating beer:', error);
         res.status(500).json({ message: 'Internal Server Error' });
@@ -38,10 +59,31 @@ exports.createBeer = async (req, res) => {
 exports.updateBeer = async (req, res) => {
     const { id } = req.params;
     try {
-        const updatedBeer = await Beer.findByIdAndUpdate(id, req.body, { new: true });
-        if (!updatedBeer) {
-            return res.status(404).json({ message: 'Beer not found' });
+        if (req.body.manufacturer) {
+            const mVal = req.body.manufacturer;
+            if (mongoose.Types.ObjectId.isValid(mVal)) {
+                const exists = await Manufacturer.findById(mVal);
+                if (!exists) return res.status(400).json({ message: 'Manufacturer not found' });
+                req.body.manufacturer = exists._id;
+            } else if (typeof mVal === 'string') {
+                // try find by name, if not found create it
+                let m = await Manufacturer.findOne({ name: { $regex: `^${mVal}$`, $options: 'i' } });
+                if (!m) {
+                    m = new Manufacturer({ name: mVal });
+                    await m.save();
+                }
+                req.body.manufacturer = m._id;
+            } else {
+                return res.status(400).json({ message: 'Invalid manufacturer value' });
+            }
         }
+
+        const updatedBeer = await Beer.findByIdAndUpdate(id, req.body, {
+            new: true,
+            runValidators: true,
+        }).populate('manufacturer');
+
+        if (!updatedBeer) return res.status(404).json({ message: 'Beer not found' });
         res.status(200).json(updatedBeer);
     } catch (error) {
         console.error(`Error updating beer with id ${id}:`, error);

@@ -76,7 +76,7 @@ export default function AdminCreateBeer({ user }) {
         const err = await res.json().catch(() => ({}));
         throw new Error(err.message || `Request failed (${res.status})`);
       }
-      navigate("/admin");
+      navigate("/proizvodi");
     } catch (err) {
       setError(err.message || "Greška pri stvaranju piva");
     } finally {
@@ -89,7 +89,7 @@ export default function AdminCreateBeer({ user }) {
       <div className="add-beer-header">
         <h1>Dodaj novo pivo</h1>
         <Link
-          to="/admin"
+          to="/proizvodi"
           className="form-button"
           style={{ background: "#ddd", color: "#071222" }}
         >

@@ -38,7 +38,7 @@ export default function BeerDetail() {
   const isUserAdmin = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     return user && user.isAdmin;
-  }
+  };
 
   async function handleDelete() {
     if (isUserAdmin() === false) {
@@ -46,7 +46,9 @@ export default function BeerDetail() {
       setError("Nemate ovlasti za brisanje piva.");
       return;
     }
-    const confirm = window.confirm("Jeste li sigurni da želite izbrisati ovo pivo?");
+    const confirm = window.confirm(
+      "Jeste li sigurni da želite izbrisati ovo pivo?"
+    );
     if (!confirm) return;
 
     try {
@@ -69,7 +71,9 @@ export default function BeerDetail() {
 
   return (
     <div className="beer-detail-container">
-      <Link to="/proizvodi" className="back-link">← Natrag na proizvode</Link>
+      <Link to="/proizvodi" className="back-link">
+        ← Natrag na proizvode
+      </Link>
 
       <div className="beer-detail-card">
         <div className="beer-detail-image">
@@ -81,22 +85,46 @@ export default function BeerDetail() {
           <p className="price">
             Cijena: {beer.priceEur} EUR / {beer.priceHrk} HRK
           </p>
-          <p><strong>Proizvođač:</strong> {beer.manufacturer?.name}</p>
-          {beer.abv && <p><strong>ABV:</strong> {beer.abv}%</p>}
-          {beer.type && <p><strong>Tip:</strong> {beer.type}</p>}
-          {beer.volume && <p><strong>Volumen:</strong> {beer.volume} ml</p>}
+          <p>
+            <strong>Proizvođač:</strong> {beer.manufacturer?.name}
+          </p>
+          {beer.abv && (
+            <p>
+              <strong>ABV:</strong> {beer.abv}%
+            </p>
+          )}
+          {beer.type && (
+            <p>
+              <strong>Tip:</strong> {beer.type}
+            </p>
+          )}
+          {beer.volume && (
+            <p>
+              <strong>Volumen:</strong> {beer.volume} ml
+            </p>
+          )}
           <div className="beer-full-description">
             <h3>Opis</h3>
             <p>{beer.description || "Nema dodatnog opisa."}</p>
           </div>
+          {isUserAdmin() && (
+            <div className="admin-actions">
+              <Link
+                to={`/admin/uredi-pivo/${beer._id}`}
+                className="details-button"
+              >
+                Uredi
+              </Link>
+            </div>
+          )}
         </div>
         {isUserAdmin() && (
-        <div className="admin-actions">
-          <button className="delete-beer-button" onClick={handleDelete}>
-            Izbriši Pivo
-          </button>
-        </div>
-      )}
+          <div className="admin-actions">
+            <button className="delete-beer-button" onClick={handleDelete}>
+              Izbriši Pivo
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

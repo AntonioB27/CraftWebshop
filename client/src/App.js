@@ -7,10 +7,13 @@ import Profile from "./components/auth/Profile";
 import Home from "./components/home/Home";
 import Footer from "./components/elements/Footer";
 import Manufacturers from "./components/home/Manufacturers";
+import ManufacturerDetail from "./components/home/ManufacturerDetail";
 import Admin from "./components/admin/Admin";
 import AdminUsers from "./components/admin/AdminUsers";
 import BeerDetail from "./components/home/BeerDetail"; // added import
 import AdminCreateBeer from "./components/admin/AdminCreateBeer";
+import AdminEditBeer from "./components/admin/AdminEditBeer";
+import AdminCreateManufacturer from "./components/admin/AdminCreateManufacturer";
 
 function App() {
   const [user, setUser] = useState(() => {
@@ -57,10 +60,13 @@ function App() {
         <Route path="/register" element={<Register setUser={setUser} />} />
         <Route path="/profile" element={<Profile user={user} />} />
         <Route path="/proizvodaci" element={<Manufacturers />} />
+        <Route path="/proizvodaci/:id" element={<ManufacturerDetail />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/admin/korisnici" element={<AdminUsers user={user} />} />
         <Route path="/proizvodi/:id" element={<BeerDetail />} />
         <Route path="/admin/kreiraj-pivo" element={<AdminCreateBeer user={user} />} />
+        <Route path="/admin/uredi-pivo/:id" element={<AdminEditBeer user={user} />} />
+        <Route path="/admin/kreiraj-proizvodac" element={<AdminCreateManufacturer user={user} />} />
       </Routes>
     </Router>
   );
