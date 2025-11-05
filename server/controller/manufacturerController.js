@@ -20,7 +20,7 @@ exports.getById = async (req, res) => {
     if (!manufacturer) return res.status(404).json({ message: 'Manufacturer not found' });
     res.status(200).json(manufacturer);
   } catch (err) {
-    console.error('Error fetching manufacturer:', err);
+    console.error(`Error fetching manufacturer with id ${id}:`, err);
     res.status(500).json({ message: 'Internal Server Error' });
   }
 };
@@ -48,6 +48,41 @@ exports.create = async (req, res) => {
     res.status(201).json(saved);
   } catch (err) {
     console.error('Error creating manufacturer:', err);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
+
+exports.update = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const { name, description, imageUrl } = req.body;
+    if (!name || !name.trim()) {
+      return res.status(400).json({ message: 'Name is required' });
+    }
+
+    // check for duplicates (exclude current manufacturer)
+    const exists = await Manufacturer.findOne({ 
+      name: { $regex: `^${name.trim()}$`, $options: 'i' },
+      _id: { $ne: id }
+    });
+    if (exists) {
+      return res.status(409).json({ message: 'Manufacturer with that name already exists' });
+    }
+
+    const updated = await Manufacturer.findByIdAndUpdate(
+      id,
+      {
+        name: name.trim(),
+        description: description || '',
+        imageUrl: imageUrl || '',
+      },
+      { new: true, runValidators: true }
+    );
+
+    if (!updated) return res.status(404).json({ message: 'Manufacturer not found' });
+    res.status(200).json(updated);
+  } catch (err) {
+    console.error(`Error updating manufacturer with id ${id}:`, err);
     res.status(500).json({ message: 'Internal Server Error' });
   }
 };

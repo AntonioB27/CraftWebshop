@@ -14,6 +14,7 @@ import BeerDetail from "./components/home/BeerDetail"; // added import
 import AdminCreateBeer from "./components/admin/AdminCreateBeer";
 import AdminEditBeer from "./components/admin/AdminEditBeer";
 import AdminCreateManufacturer from "./components/admin/AdminCreateManufacturer";
+import AdminEditManufacturer from "./components/admin/AdminEditManufacturer";
 
 function App() {
   const [user, setUser] = useState(() => {
@@ -67,6 +68,7 @@ function App() {
         <Route path="/admin/kreiraj-pivo" element={<AdminCreateBeer user={user} />} />
         <Route path="/admin/uredi-pivo/:id" element={<AdminEditBeer user={user} />} />
         <Route path="/admin/kreiraj-proizvodac" element={<AdminCreateManufacturer user={user} />} />
+        <Route path="/admin/uredi-proizvodaca/:id" element={<AdminEditManufacturer user={user} />} />
       </Routes>
     </Router>
   );

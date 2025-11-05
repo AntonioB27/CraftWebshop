@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../../static/styles/home.css"
 import { Link } from "react-router-dom";
+import Search from "../elements/Search";
 
 export default function Home() {
   const [beers, setBeers] = useState([]);
@@ -44,6 +45,7 @@ export default function Home() {
 
   return (
     <>
+      <Search setBeers={setBeers} />
       <div className="home-container">
         {beers.map((beer) => (
           <div key={beer._id} className="beer-card">
