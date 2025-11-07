@@ -51,7 +51,6 @@ async function seed() {
     await mongoose.connect(MONGO_URL);
     console.log('Connected to MongoDB');
 
-    // WARNING: removes all users in the collection
     await User.deleteMany({});
     console.log('Cleared users collection');
 

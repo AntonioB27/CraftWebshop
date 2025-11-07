@@ -4,6 +4,9 @@ import beerMug from "../static/images/beer-mug.png";
 import { useNavigate } from "react-router-dom";
 import "../static/styles/nav.css";
 import "../static/styles/footer.css";
+import Cart from "./elements/Cart";
+import Search from "./elements/Search";
+import Wishlist from "./elements/Wishlist";
 
 export default function NavBar({ user, setUser }) {
   const navigate = useNavigate();
@@ -39,39 +42,47 @@ export default function NavBar({ user, setUser }) {
       </div>
 
       <div className="navbar-right">
-        {user ? (
-          <>
-            <Link to="/profile" className="nav-link">
-              <button type="button" className="nav-button">
-                Profil
+        <div className="nav-actions">
+          {user ? (
+            <>
+              <Link to="/profile" className="nav-link">
+                <button type="button" className="nav-button">
+                  Profil
+                </button>
+              </Link>
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="nav-button"
+              >
+                Odjava
               </button>
-            </Link>
-            <button type="button" onClick={handleLogout} className="nav-button">
-              Odjava
-            </button>
-          </>
-        ) : (
-          <>
-            <Link to="/login" className="nav-link">
-              <button type="button" className="nav-button">
-                Prijava
-              </button>
-            </Link>
-            <Link to="/register" className="nav-link">
-              <button type="button" className="nav-button">
-                Registracija
-              </button>
-            </Link>
-          </>
-        )}
+              <Cart user={user} />
+              <Wishlist user={user} />
+            </>
+          ) : (
+            <>
+              <Link to="/login" className="nav-link">
+                <button type="button" className="nav-button">
+                  Prijava
+                </button>
+              </Link>
+              <Link to="/register" className="nav-link">
+                <button type="button" className="nav-button">
+                  Registracija
+                </button>
+              </Link>
+            </>
+          )}
 
-        {isUserAdmin && (
-          <Link to="/admin" className="nav-link">
-            <button type="button" className="nav-button">
-              Admin
-            </button>
-          </Link>
-        )}
+          {isUserAdmin && (
+            <Link to="/admin" className="nav-link">
+              <button type="button" className="nav-button">
+                Admin
+              </button>
+            </Link>
+          )}
+        </div>
       </div>
     </nav>
   );

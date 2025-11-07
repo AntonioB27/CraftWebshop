@@ -29,7 +29,7 @@ export default function AdminCreateBeer({ user }) {
     description: "",
     priceEur: "",
     priceHrk: "",
-    manufacturer: "", // will hold manufacturer _id from dropdown
+    manufacturer: "",
     abv: "",
     type: "",
     volume: "",

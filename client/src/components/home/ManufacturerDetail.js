@@ -36,7 +36,6 @@ export default function ManufacturerDetail() {
     return `${API_BASE}/static/images/${filename}`.replace("//static", "/static");
   };
 
-  // simple admin check from localStorage
   const isUserAdmin = () => {
     try {
       const user = JSON.parse(localStorage.getItem("user"));

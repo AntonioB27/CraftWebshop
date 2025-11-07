@@ -32,7 +32,6 @@ exports.create = async (req, res) => {
       return res.status(400).json({ message: 'Name is required' });
     }
 
-    // prevent duplicates (case-insensitive)
     const exists = await Manufacturer.findOne({ name: { $regex: `^${name}$`, $options: 'i' } });
     if (exists) {
       return res.status(409).json({ message: 'Manufacturer with that name already exists' });
@@ -60,7 +59,6 @@ exports.update = async (req, res) => {
       return res.status(400).json({ message: 'Name is required' });
     }
 
-    // check for duplicates (exclude current manufacturer)
     const exists = await Manufacturer.findOne({ 
       name: { $regex: `^${name.trim()}$`, $options: 'i' },
       _id: { $ne: id }
@@ -87,7 +85,6 @@ exports.update = async (req, res) => {
   }
 };
 
-// new: safe delete manufacturer
 exports.delete = async (req, res) => {
   const { id } = req.params;
   try {

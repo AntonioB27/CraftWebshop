@@ -83,7 +83,7 @@ body {
 .nav-button:hover{
   background: var(--accent);
   transform: translateY(-3px);
-  padding: 16px 20px;
+  padding: 10px 14px;
   box-shadow: 0 6px 18px rgba(255, 255, 255, 0.45);
   transition: background 0.5s, padding 1s, box-shadow 1.5s;
 }

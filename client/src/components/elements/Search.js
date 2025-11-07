@@ -17,7 +17,7 @@ function Search({ setBeers }) {
         setResults([]);
         setShowResults(false);
       }
-    }, 300); // debounce search
+    }, 300);
 
     return () => clearTimeout(searchTimeout);
   }, [query]);

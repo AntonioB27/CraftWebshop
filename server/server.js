@@ -29,6 +29,8 @@ app.use('/api', apiRouter);
 apiRouter.use('/users', userRoute);
 apiRouter.use('/beers', beerRoute);
 apiRouter.use('/manufacturers', manufacturerRoute)
+app.use('/api/cart', require('./routes/cartRoute'));
+app.use('/api/wishlist', require('./routes/wishlistRoute'));
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import "../../static/styles/home.css";
 import "../../static/styles/beerDetail.css";
+import { useCart } from '../../context/CartContext';
+import { useWishlist } from '../../context/WishlistContext';
 
 export default function BeerDetail() {
   const { id } = useParams();
@@ -9,6 +11,8 @@ export default function BeerDetail() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:5000";
+  const { addToCart } = useCart();
+  const { toggleWishlist } = useWishlist();
 
   useEffect(() => {
     async function load() {
@@ -35,10 +39,19 @@ export default function BeerDetail() {
     return `${API_BASE}/static/images/beers/${filename}`;
   };
 
-  const isUserAdmin = () => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    return user && user.isAdmin;
-  };
+  function getStoredUser() {
+    const raw = localStorage.getItem('user');
+    if (!raw) return null;
+    try {
+      const obj = JSON.parse(raw);
+      return obj && typeof obj === 'object' ? obj : null;
+    } catch {
+      return null;
+    }
+  }
+  const currentUser = getStoredUser();
+
+  const isUserAdmin = () => currentUser?.isAdmin === true;
 
   async function handleDelete() {
     if (isUserAdmin() === false) {
@@ -67,6 +80,17 @@ export default function BeerDetail() {
     } finally {
       setLoading(false);
     }
+  }
+
+  async function handleAddToCart() {
+    if (!currentUser) { alert("Molimo prijavite se za dodavanje u košaricu."); return; }
+    const r = await addToCart(beer._id, 1);
+    alert(r.ok ? "Dodano u košaricu!" : (r.message || "Greška pri dodavanju."));
+  }
+
+  async function handleToggleWishlist() {
+    if (!currentUser) { alert("Prijavite se za wishlist."); return; }
+    await toggleWishlist(beer._id);
   }
 
   return (
@@ -125,6 +149,12 @@ export default function BeerDetail() {
             </button>
           </div>
         )}
+        <div style={{ marginTop: 14, display: 'flex', gap: 10 }}>
+          <button className="details-button" onClick={handleAddToCart}>Dodaj u košaricu</button>
+          <button className="details-button" style={{ background:'#ff4d6d', color:'#fff' }} onClick={handleToggleWishlist}>
+            ❤ Wishlist
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../static/styles/auth.css";
 
@@ -6,6 +6,13 @@ export default function Login({ setUser }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (user) {
+      navigate("/");
+    }
+  }, [navigate]);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -18,7 +25,6 @@ export default function Login({ setUser }) {
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Login failed");
 
-      // store token and user
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
       setUser(data.user);

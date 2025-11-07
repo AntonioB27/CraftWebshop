@@ -66,7 +66,6 @@ exports.updateBeer = async (req, res) => {
                 if (!exists) return res.status(400).json({ message: 'Manufacturer not found' });
                 req.body.manufacturer = exists._id;
             } else if (typeof mVal === 'string') {
-                // try find by name, if not found create it
                 let m = await Manufacturer.findOne({ name: { $regex: `^${mVal}$`, $options: 'i' } });
                 if (!m) {
                     m = new Manufacturer({ name: mVal });

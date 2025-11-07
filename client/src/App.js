@@ -15,6 +15,8 @@ import AdminCreateBeer from "./components/admin/AdminCreateBeer";
 import AdminEditBeer from "./components/admin/AdminEditBeer";
 import AdminCreateManufacturer from "./components/admin/AdminCreateManufacturer";
 import AdminEditManufacturer from "./components/admin/AdminEditManufacturer";
+import { CartProvider } from './context/CartContext';
+import { WishlistProvider } from './context/WishlistContext';
 
 function App() {
   const [user, setUser] = useState(() => {
@@ -34,43 +36,57 @@ function App() {
         const res = await fetch("/api/users/fetch", {
           headers: { Authorization: `Bearer ${token}` },
         });
+
+        if (res.status === 401 || res.status === 403) {
+          // only clear on auth failure
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+            setUser(null);
+            return;
+        }
+
         if (!res.ok) {
-          // invalid token -> clear
-          localStorage.removeItem("token");
-          localStorage.removeItem("user");
-          setUser(null);
+          // log but do NOT logout on non-auth errors (e.g. 400/500)
+          console.warn("fetchMe non-auth error:", res.status);
           return;
         }
+
         const data = await res.json();
-        setUser(data.user);
-        localStorage.setItem("user", JSON.stringify(data.user));
+        if (data?.user) {
+          setUser(data.user);
+          localStorage.setItem("user", JSON.stringify(data.user));
+        }
       } catch (err) {
-        console.error("fetchMe:", err);
+        console.error("fetchMe network error:", err);
       }
     }
     fetchMe();
   }, []);
 
   return (
-    <Router>
-      <NavBar user={user} setUser={setUser} />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/proizvodi" element={<Home />} />
-        <Route path="/login" element={<Login setUser={setUser} />} />
-        <Route path="/register" element={<Register setUser={setUser} />} />
-        <Route path="/profile" element={<Profile user={user} />} />
-        <Route path="/proizvodaci" element={<Manufacturers />} />
-        <Route path="/proizvodaci/:id" element={<ManufacturerDetail />} />
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/admin/korisnici" element={<AdminUsers user={user} />} />
-        <Route path="/proizvodi/:id" element={<BeerDetail />} />
-        <Route path="/admin/kreiraj-pivo" element={<AdminCreateBeer user={user} />} />
-        <Route path="/admin/uredi-pivo/:id" element={<AdminEditBeer user={user} />} />
-        <Route path="/admin/kreiraj-proizvodac" element={<AdminCreateManufacturer user={user} />} />
-        <Route path="/admin/uredi-proizvodaca/:id" element={<AdminEditManufacturer user={user} />} />
-      </Routes>
-    </Router>
+    <CartProvider user={user}>
+      <WishlistProvider user={user}>
+        <Router>
+          <NavBar user={user} setUser={setUser} />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/proizvodi" element={<Home />} />
+            <Route path="/login" element={<Login setUser={setUser} />} />
+            <Route path="/register" element={<Register setUser={setUser} />} />
+            <Route path="/profile" element={<Profile user={user} />} />
+            <Route path="/proizvodaci" element={<Manufacturers />} />
+            <Route path="/proizvodaci/:id" element={<ManufacturerDetail />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/admin/korisnici" element={<AdminUsers user={user} />} />
+            <Route path="/proizvodi/:id" element={<BeerDetail />} />
+            <Route path="/admin/kreiraj-pivo" element={<AdminCreateBeer user={user} />} />
+            <Route path="/admin/uredi-pivo/:id" element={<AdminEditBeer user={user} />} />
+            <Route path="/admin/kreiraj-proizvodac" element={<AdminCreateManufacturer user={user} />} />
+            <Route path="/admin/uredi-proizvodaca/:id" element={<AdminEditManufacturer user={user} />} />
+          </Routes>
+        </Router>
+      </WishlistProvider>
+    </CartProvider>
   );
 }
 
